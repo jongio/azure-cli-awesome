@@ -1,0 +1,16 @@
+# How to Delete Multiple Azure Resource Groups with Tags, Bash via Azure Cloud Shell, and the Azure CLI
+# Credit: https://blog.jongallant.com/2020/05/azure-delete-multiple-resource-groups/
+# Credit: https://twitter.com/acanthamoeba/status/1333551558433284100/photo/1
+
+# Instructions
+# 1. Run `az login`
+# 2. Use the Azure Portal to add a tag called 'delete' to all the resource groups you want to delete
+# 3. Run the script below.
+
+# This version will ask you to confirm each resource group deletion
+#az group list --tag delete --query [].name -o tsv | xargs -otl az group delete --no-wait  -n
+
+# This version will NOT ask you to confirm each resource group deletion
+# USE WITH CARE!!!!
+
+az group list --tag delete --query [].name -o tsv | xargs -otl az group delete -y --no-wait  -n

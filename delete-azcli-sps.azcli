@@ -1,0 +1,11 @@
+# How to Delete All Service Principals created with `az ad sp create-for-rbac`, which by default start with azure-cli in the name
+# Credit: https://twitter.com/mikkelhegn/status/1364601297396203520?s=20
+
+# Instructions
+# 1. Run `az login`
+# 2. Run the script below.
+
+# This version will NOTE ask you to confirm each resource group deletion
+# USE WITH CARE!!!!
+
+az ad sp list --show-mine --query "[?starts_with(displayName, 'azure-cli')]".objectId -o tsv | xargs -otl az ad sp delete --id
