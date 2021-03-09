@@ -4,7 +4,12 @@
 
 # Azure DevOps Organization name is the name after the host in the URL so https://dev.azure.com/[OrgName]/
 
+# 1. Update these values
 azdoOrganizationName="OrgName"
 patDisplayName="PAT"
 
+# 2. Run Az Login
+az Login
+
+# 3. Run the below command
 az rest --method post --uri "https://vssps.dev.azure.com/$azdoOrganizationName/_apis/Tokens/Pats?api-version=6.1-preview" --resource "https://management.core.windows.net/" --body '{ "displayName": "$patDisplayName" }' --headers Content-Type=application/json
