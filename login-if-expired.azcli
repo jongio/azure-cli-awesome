@@ -1,0 +1,5 @@
+# Only prompt the user to login if their current session has expired
+
+if [[ -z $(az ad signed-in-user show --query 'objectId' -o tsv || true) ]]; then
+    az login -o none
+fi
