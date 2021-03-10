@@ -8,8 +8,7 @@
 azdoOrganizationName="OrgName"
 patDisplayName="PAT"
 
-# 2. Run Az Login
-az Login
+# 2. Run az login if not using cloud shell
 
 # 3. Run the below command
 az rest --method post --uri "https://vssps.dev.azure.com/$azdoOrganizationName/_apis/Tokens/Pats?api-version=6.1-preview" --resource "https://management.core.windows.net/" --body '{ "displayName": "$patDisplayName" }' --headers Content-Type=application/json
