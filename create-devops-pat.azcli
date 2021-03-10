@@ -1,0 +1,14 @@
+# This is a way to create an Azure DevOps personal access token using the Azure CLI and REST Endpoints.
+
+# The trick of this is that it uses the Azure CLI's access token to create an access token to the https://management.core.windows.net/ resource which also manages Azure DevOps instances.
+
+# Azure DevOps Organization name is the name after the host in the URL so https://dev.azure.com/[OrgName]/
+
+# 1. Update these values
+azdoOrganizationName="OrgName"
+patDisplayName="PAT"
+
+# 2. Run az login if not using cloud shell
+
+# 3. Run the below command
+az rest --method post --uri "https://vssps.dev.azure.com/$azdoOrganizationName/_apis/Tokens/Pats?api-version=6.1-preview" --resource "https://management.core.windows.net/" --body '{ "displayName": "$patDisplayName" }' --headers Content-Type=application/json
