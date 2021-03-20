@@ -1,0 +1,3 @@
+# This query gets all resources that start with 'meme' and outputs on the name in tsv format
+# Change 'meme' to your query and run it.
+az group list --query '[?starts_with(name, `meme`)]'.{Name:name} -o tsv
