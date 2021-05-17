@@ -10,7 +10,14 @@
 # This version will ask you to confirm each resource group deletion
 #az group list --tag delete --query [].name -o tsv | xargs -otl az group delete --no-wait  -n
 
+# Alternative query filtering for specific tag key/value | This version will ask you to confirm each resource group deletion
+#az group list --query "[?tags.foo=='bar'].name" -o tsv | xargs -otl az group delete --no-wait -n
+
 # This version will NOT ask you to confirm each resource group deletion
 # USE WITH CARE!!!!
 
 az group list --tag delete --query [].name -o tsv | xargs -otl az group delete -y --no-wait  -n
+
+# Alternative query filtering for specific tag key/value | This version will NOT ask you to confirm each resource group deletion
+# USE WITH CARE!!!!
+#az group list --query "[?tags.foo=='bar'].name" -o tsv | xargs -otl az group delete -y --no-wait -n
