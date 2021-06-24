@@ -21,16 +21,3 @@ az group list --tag delete --query [].name -o tsv | xargs -otl az group delete -
 # Alternative query filtering for specific tag key/value | This version will NOT ask you to confirm each resource group deletion
 # USE WITH CARE!!!!
 #az group list --query "[?tags.foo=='bar'].name" -o tsv | xargs -otl az group delete -y --no-wait -n
-
-# Mega powers delete across subscriptions and e.g. groups without tags - USE WITH CAUTION
-# Requires the Resource Graph extension (az extension add --name resource-graph)
-# More info: https://docs.microsoft.com/en-us/azure/governance/resource-graph/first-query-azurecli
-# az graph query -q "ResourceContainers | where type == 'microsoft.resources/subscriptions/resourcegroups'| where subscriptionId == '<subscriptionId to target>' \ # Query for RGs in a specific subscription
-#  | where tags !contains 'protect' \ # The condition for which RGs to return
-#  | project name" | jq -r '.data[].name' \ # Returning the name of the RG and using jq to just get the name value
-#  | xargs -I XXX -to az group delete -n XXX --no-wait # passing each name from the above query to 'az group delete', with the xargs '-to' args, we'll see the command and get to confirm to delete the RG
-# Full command below:
-#az graph query -q "ResourceContainers | where type == 'microsoft.resources/subscriptions/resourcegroups'| where subscriptionId == '<subscriptionId to target>' \
-# | where tags !contains 'protect' \
-# | project name" | jq -r '.data[].name' \
-# | xargs -I XXX -to az group delete -n XXX --no-wait
