@@ -1,0 +1,16 @@
+# Mega powers to delete across subscriptions and e.g. groups without tags - USE WITH CAUTION
+# Requires the Resource Graph extension (az extension add --name resource-graph)
+# More info: https://docs.microsoft.com/en-us/azure/governance/resource-graph/first-query-azurecli
+
+# Description of the command:
+# az graph query -q "ResourceContainers | where type == 'microsoft.resources/subscriptions/resourcegroups'| where subscriptionId == '<subscriptionId to target>' \ # Query for RGs in a specific subscription
+#  | where tags !contains 'protect' \ # The condition for which RGs to return
+#  | project name" | jq -r '.data[].name' \ # Returning the name of the RG and using jq to just get the name value
+#  | xargs -I XXX -to az group delete -n XXX --no-wait # passing each name from the above query to 'az group delete', with the xargs '-to' args, we'll see the command and get to confirm to delete the RG
+
+# Full command below:
+#subscriptionId=<subscriptionId>
+#az graph query -q "ResourceContainers | where type == 'microsoft.resources/subscriptions/resourcegroups'| where subscriptionId == '${subscriptionId}' \
+# | where tags !contains 'protect' \
+# | project name" | jq -r '.data[].name' \
+# | xargs -I XXX -to az group delete -n XXX --no-wait
