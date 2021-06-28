@@ -1,4 +1,4 @@
-# Mega powers to delete across subscriptions and e.g. groups without tags - USE WITH CAUTION
+# Mega powers to delete across subscriptions and e.g. groups with a specific tag - USE WITH CAUTION
 # Requires the Resource Graph extension (az extension add --name resource-graph)
 # More info: https://docs.microsoft.com/en-us/azure/governance/resource-graph/first-query-azurecli
 
@@ -6,7 +6,7 @@
 # Step to run the command:
 # 1. Install Resource Graph Extension (az extension add --name resource-graph)
 # 2. Make sure to input the subscriptionId you want to target `subscriptionId=<subscriptionId>`
-# 2. Change the query to find the resource groups to delete e.g. `where tags !contains 'protect'`
+# 2. Change the `where` query to find the resource groups to delete e.g. `where tags !contains 'protect'`
 # 3. Run the command. You will be asked to confirm each deletion.
 
 # Description of the command:
