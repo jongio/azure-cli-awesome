@@ -4,7 +4,8 @@
 
 # This command allows you to delete resource groups, given any query against the Azure Resource Graph.
 # Step to run the command:
-# 1. Make sure to input the subscriptionId you want to target `subscriptionId=<subscriptionId>`
+# 1. Install Resource Graph Extension (az extension add --name resource-graph)
+# 2. Make sure to input the subscriptionId you want to target `subscriptionId=<subscriptionId>`
 # 2. Change the query to find the resource groups to delete e.g. `where tags !contains 'protect'`
 # 3. Run the command. You will be asked to confirm each deletion.
 
