@@ -5,7 +5,7 @@
 # 1. Run `az login`
 # 2. Run the script below.
 
-# This version will NOT ask you to confirm each resource group deletion
+# This version will NOT ask you to confirm each service principal deletion
 # USE WITH CARE!!!!
 
 az ad sp list --show-mine --query "[?starts_with(displayName, 'azure-cli')]".objectId -o tsv | xargs -otl az ad sp delete --id
