@@ -18,6 +18,10 @@
 
 az group list --tag delete --query [].name -o tsv | xargs -otl az group delete -y --no-wait  -n
 
+# filter by sub id
+az group list --subscription {SUB_ID} --tag delete --query [].name -o tsv | xargs -otl az group delete --subscription {SUB_ID} -y --no-wait  -n
+
+
 # Alternative query filtering for specific tag key/value | This version will NOT ask you to confirm each resource group deletion
 # USE WITH CARE!!!!
 #az group list --query "[?tags.foo=='bar'].name" -o tsv | xargs -otl az group delete -y --no-wait -n
